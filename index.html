@@ -36,7 +36,6 @@
       margin: 0 auto;
     }
 
-    /* Styles from T04-2 for the old SVG */
     svg:not(.responsive-svg-container svg) {
       display: block;
       width: 100%;
@@ -55,11 +54,10 @@
       color: #666;
     }
 
-    /* NEW: Step 2 - Responsive CSS for T04-3 */
     .responsive-svg-container {
-      margin: 40px auto; /* center and add some space */
-      width: 100%; /* fill parent width */
-      max-width: 1200px; /* cap max width */
+      margin: 40px auto; 
+      width: 100%; 
+      max-width: 1200px; 
     }
   </style>
 </head>
@@ -79,21 +77,22 @@
     <div id="content"></div>
     <svg width="300" height="150"></svg>
     
-    <!-- NEW: Container for T04-3 chart -->
+    <!-- Container for T04-3 chart -->
     <div class="responsive-svg-container"></div>
   </main>
 
   <footer>
-    <p>&copy; 2026 Your Name</p>
+    <p>&copy; 2026 Effa Alfazira</p>
   </footer>
 
   <!-- D3 library -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
-  <!-- NEW: JS for T04-3 only -->
-  <script src="t04-3-bars.js"></script>
+  <!-- NEW: T04-4 loader -->
+  <script src="t04-4-load.js"></script>
 
-  <!-- Old T04-2 demo (temporarily disabled) -->
+  <!-- Old scripts (disabled) -->
+  <!-- <script src="t04-3-bars.js"></script> -->
   <!-- <script src="energy-d3.js"></script> -->
 </body>
 </html>
