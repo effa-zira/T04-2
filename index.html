@@ -35,16 +35,6 @@
       max-width: 800px;
       margin: 0 auto;
     }
-
-    svg:not(.responsive-svg-container svg) {
-      display: block;
-      width: 100%;
-      height: auto;
-      border: 2px solid #536b58;
-      border-radius: 8px;
-      background: #dff3ff;
-      margin-top: 20px;
-    }
     
     footer {
       margin-top: 40px;
@@ -72,12 +62,10 @@
   </header>
 
   <main>
-    <!-- T04-2 Content -->
     <h1>Appliance Energy Consumption</h1>
     <div id="content"></div>
-    <svg width="300" height="150"></svg>
     
-    <!-- Container for T04-3 chart -->
+    <!-- Container where the new D3 chart will be drawn -->
     <div class="responsive-svg-container"></div>
   </main>
 
@@ -85,14 +73,9 @@
     <p>&copy; 2026 Effa Alfazira</p>
   </footer>
 
-  <!-- D3 library -->
+  <!-- Load scripts in order -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
-
-  <!-- NEW: T04-4 loader -->
   <script src="t04-4-load.js"></script>
-
-  <!-- Old scripts (disabled) -->
-  <!-- <script src="t04-3-bars.js"></script> -->
-  <!-- <script src="energy-d3.js"></script> -->
+  <script src="t04-5-bars.js"></script>
 </body>
 </html>
