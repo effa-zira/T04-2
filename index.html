@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>T04-2 – Appliance Energy Consumption</title>
+  <title>T04 – Appliance Energy Consumption</title>
   <style>
     body {
       margin: 0;
@@ -13,7 +13,6 @@
       font-family: system-ui, sans-serif;
     }
 
-    /* Basic styling for the header to match the example */
     header {
       background-color: #2c3e50;
       padding: 10px 20px;
@@ -37,7 +36,8 @@
       margin: 0 auto;
     }
 
-    svg {
+    /* Styles from T04-2 for the old SVG */
+    svg:not(.responsive-svg-container svg) {
       display: block;
       width: 100%;
       height: auto;
@@ -54,11 +54,17 @@
       text-align: center;
       color: #666;
     }
+
+    /* NEW: Step 2 - Responsive CSS for T04-3 */
+    .responsive-svg-container {
+      margin: 40px auto; /* center and add some space */
+      width: 100%; /* fill parent width */
+      max-width: 1200px; /* cap max width */
+    }
   </style>
 </head>
 <body>
 
-  <!-- Step 1: Added back the navigation header -->
   <header>
     <nav>
       <a href="#">Home</a>
@@ -68,20 +74,26 @@
   </header>
 
   <main>
-    <!-- Step 1: The elements D3 will use -->
+    <!-- T04-2 Content -->
     <h1>Appliance Energy Consumption</h1>
     <div id="content"></div>
-
-    <!-- Give the SVG a size so shapes can be seen -->
     <svg width="300" height="150"></svg>
+    
+    <!-- NEW: Container for T04-3 chart -->
+    <div class="responsive-svg-container"></div>
   </main>
 
   <footer>
     <p>&copy; 2026 Your Name</p>
   </footer>
 
-  <!-- Step 1: Load D3 first, then your D3 code file -->
+  <!-- D3 library -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="energy-d3.js"></script>
+
+  <!-- NEW: JS for T04-3 only -->
+  <script src="t04-3-bars.js"></script>
+
+  <!-- Old T04-2 demo (temporarily disabled) -->
+  <!-- <script src="energy-d3.js"></script> -->
 </body>
 </html>
