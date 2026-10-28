@@ -1,39 +1,78 @@
 // t04-5-bars.js
 const createBarChart = (data) => {
-  // SVG internal coordinate system (used to position and size chart elements)
-  const viewW = 500, viewH = 1600;
+  // --- Sizes (logical vs. display) ---
+  const viewW = 500;
+  const viewH = Math.max(220, data.length * 28);
+  const displayW = 640;
+  const displayH = Math.min(480, data.length * 24 + 40);
 
-  // SVG size displayed on the webpage
-  const displayW = 640, displayH = 420;
-
+  // --- SVG root ---
   const svg = d3.select(".responsive-svg-container")
     .append("svg")
-    .attr("viewBox", `0 0 ${viewW} ${viewH}`)  // internal coordinate system
-    .attr("width", displayW)                   // displayed width
-    .attr("height", displayH)                  // displayed height
-    .style("border", "1px solid black");
+    .attr("viewBox", `0 0 ${viewW} ${viewH}`)
+    .attr("width", displayW)
+    .attr("height", displayH)
+    .style("border", "1px solid #ccc");
 
-  // X scale (numeric): count -> bar width
+  // --- Scales (from T04-6) ---
   const xMax = d3.max(data, d => d.count);
   const xScale = d3.scaleLinear()
-    .domain([0, xMax])      // input: 0 to the largest count
-    .range([0, viewW]);     // output: 0 to the SVG's logical width
+    .domain([0, xMax])
+    .range([0, viewW]);
 
-  // Y scale (categorical): brand -> vertical position
   const yScale = d3.scaleBand()
-    .domain(data.map(d => d.brand))  // all brand names
-    .range([0, viewH])               // top to bottom of the SVG
-    .paddingInner(0.2)               // space between bars
-    .paddingOuter(0.1);              // space before first and after last bar
+    .domain(data.map(d => d.brand))
+    .range([0, viewH])
+    .paddingInner(0.2)
+    .paddingOuter(0.1);
 
-  // Bars
+  // OLD rectangle-only drawing block from T04-6 (COMMENTED OUT for T04-7)
+  /*
   svg.selectAll("rect")
     .data(data)
     .join("rect")
     .attr("class", d => `bar bar-${d.count}`)
-    .attr("x", 0)                            // start at the left edge
-    .attr("y", d => yScale(d.brand))         // position by brand
-    .attr("width", d => xScale(d.count))     // scaled width
-    .attr("height", yScale.bandwidth())      // height from the band scale
+    .attr("x", 0)
+    .attr("y", d => yScale(d.brand))
+    .attr("width", d => xScale(d.count))
+    .attr("height", yScale.bandwidth())
     .attr("fill", "steelblue");
+  */
+
+  // --- NEW in T04-7: one group per row (bar + labels move together) ---
+  const labelX = 100;  // labels end here, bars start here
+
+  const barAndLabel = svg
+    .selectAll("g")
+    .data(data)
+    .join("g")
+    .attr("transform", d => `translate(0, ${yScale(d.brand)})`);
+
+  // --- Bar rectangle inside the group ---
+  barAndLabel
+    .append("rect")
+    .attr("x", labelX)
+    .attr("y", 0)                         // group sets the vertical position
+    .attr("width", d => xScale(d.count))
+    .attr("height", yScale.bandwidth())
+    .attr("fill", "steelblue");
+
+  // --- Category text (left of bar, right-aligned at x = 100) ---
+  barAndLabel
+    .append("text")
+    .text(d => d.brand)
+    .attr("x", labelX)
+    .attr("y", 15)
+    .attr("text-anchor", "end")
+    .style("font-family", "sans-serif")
+    .style("font-size", "13px");
+
+  // --- Value text (just past the end of each bar) ---
+  barAndLabel
+    .append("text")
+    .text(d => d.count)
+    .attr("x", d => labelX + xScale(d.count) + 4)
+    .attr("y", 12)
+    .style("font-family", "sans-serif")
+    .style("font-size", "13px");
 };
