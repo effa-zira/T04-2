@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation Menu (kept) -->
+    <!-- Navigation Menu -->
     <nav>
         <a href="index.html">
             <img src="logo.png" alt="Power Logo" class="logo">
@@ -19,20 +19,24 @@
         </ul>
     </nav>
 
-    <!-- D3 elements -->
+    <!-- Existing T04-2 content -->
     <h1>Appliance Energy Consumption</h1>
     <div id="content"></div>
-
-    <!-- Give the SVG a size so shapes can be seen -->
     <svg width="300" height="150"></svg>
+
+    <!-- NEW: Container for T04-3 chart -->
+    <div class="responsive-svg-container"></div>
 
     <footer>
         <p>&copy; 2026 Effa Alfazira. All rights reserved.</p>
         <p>GenAI Acknowledgement: This website was built with assistance from GitHub Copilot for code generation and debugging.</p>
     </footer>
 
-    <!-- Load D3 first, then your D3 code file -->
+    <!-- D3 library -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="energy-d3.js"></script>
+    <!-- NEW: JS for T04-3 only -->
+    <script src="t04-3-bars.js"></script>
+    <!-- Old T04-2 demo (temporarily disabled) -->
+    <!-- <script src="energy-d3.js"></script> -->
 </body>
 </html>
